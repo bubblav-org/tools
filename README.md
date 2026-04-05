@@ -46,7 +46,7 @@ npx @bubblav/tools skills add web-scrape-md
 Install directly from GitHub:
 
 ```text
-/plugin install github:bubblav-org/tools/claude-code-plugin
+/plugin install https://github.com/bubblav-org/tools
 ```
 
 ## Release

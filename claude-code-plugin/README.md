@@ -3,7 +3,7 @@
 Install directly from GitHub:
 
 ```text
-/plugin install github:bubblav-org/tools/claude-code-plugin
+/plugin install https://github.com/bubblav-org/tools
 ```
 
 This plugin includes:
