@@ -43,12 +43,33 @@ npx @bubblav/tools skills add web-scrape-md
 
 ## Claude Code Plugin
 
-Install directly from GitHub:
+### Install via marketplace
+
+Add the BubblaV marketplace and install the plugin:
 
 ```text
-/plugin install https://github.com/bubblav-org/tools
+/plugin marketplace add bubblav-org/tools
 ```
 
-## Release
+Then browse and install from the **Discover** tab, or install directly:
 
-This repo publishes to npm from GitHub Actions when a GitHub Release is published, or manually via `workflow_dispatch`.
+```text
+/plugin install bubblav-tools@bubblav-org-tools
+```
+
+After installing, reload to activate:
+
+```text
+/reload-plugins
+```
+
+### Configure API key
+
+Set `BUBBLAV_API_KEY` in your project's `.claude/.env` file:
+
+```bash
+# .claude/.env
+BUBBLAV_API_KEY=bubblav_mcp_YOUR_API_KEY
+```
+
+The skill will prompt you for the key on first use if it's not configured. Once saved to `.claude/.env`, it persists across sessions.
