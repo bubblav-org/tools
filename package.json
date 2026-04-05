@@ -35,8 +35,5 @@
   "homepage": "https://github.com/bubblav-org/tools",
   "bugs": {
     "url": "https://github.com/bubblav-org/tools/issues"
-  },
-  "engines": {
-    "node": ">=18"
   }
 }
