@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "bubblav": {
+      "type": "http",
+      "url": "https://www.bubblav.com/api/mcp",
+      "headers": {
+        "X-API-Key": "$BUBBLAV_API_KEY"
+      }
+    }
+  }
+}

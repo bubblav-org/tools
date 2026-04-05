@@ -1,0 +1,11 @@
+{
+  "name": "bubblav-tools",
+  "description": "BubblaV plugin for Claude Code: web scrape skill + MCP server integration",
+  "version": "0.1.0",
+  "author": {
+    "name": "BubblaV"
+  },
+  "homepage": "https://www.bubblav.com",
+  "repository": "https://github.com/bubblav-org/tools",
+  "license": "MIT"
+}
