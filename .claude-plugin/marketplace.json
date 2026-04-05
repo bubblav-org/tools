@@ -1,23 +1,9 @@
 {
   "name": "bubblav-tools",
-  "description": "BubblaV plugin for Claude Code — web scraping skill + MCP server integration for AI-powered chatbot analytics, knowledge base search, and conversation management.",
-  "version": "0.1.0",
-  "author": {
+  "owner": {
     "name": "BubblaV",
     "email": "support@bubblav.com"
   },
-  "homepage": "https://www.bubblav.com",
-  "repository": "https://github.com/bubblav-org/tools",
-  "license": "MIT",
-  "keywords": [
-    "bubblav",
-    "web-scraping",
-    "chatbot",
-    "mcp",
-    "knowledge-base",
-    "analytics",
-    "customer-support"
-  ],
   "plugins": [
     {
       "name": "bubblav-tools",
@@ -25,7 +11,7 @@
         "source": "github",
         "repo": "bubblav-org/tools"
       },
-      "description": "BubblaV MCP server integration with web scraping skill",
+      "description": "BubblaV plugin for Claude Code — web scraping skill + MCP server integration for AI-powered chatbot analytics, knowledge base search, and conversation management.",
       "version": "0.1.0",
       "author": {
         "name": "BubblaV"
