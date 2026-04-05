@@ -1,6 +1,6 @@
 {
   "name": "@bubblav/tools",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "BubblaV AI services SDK + CLI (scrape today, embeddings/search next)",
   "type": "module",
   "main": "./src/index.js",
