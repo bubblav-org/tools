@@ -65,7 +65,14 @@ After installing, reload to activate:
 
 ### Configure API key
 
-Set `BUBBLAV_API_KEY` in your project's `.claude/.env` file:
+1. Log in to your [BubblaV dashboard](https://www.bubblav.com)
+2. Navigate to your **Website Settings** page
+3. Click the **API Keys** tab
+4. Click **Generate New Key**
+5. Enter a name (e.g. "Claude Code") and select **MCP scopes**
+6. Click **Generate** and copy the key immediately — it won't be shown again
+
+Then set it in your project's `.claude/.env` file:
 
 ```bash
 # .claude/.env
