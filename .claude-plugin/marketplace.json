@@ -21,7 +21,10 @@
   "plugins": [
     {
       "name": "bubblav-tools",
-      "source": ".",
+      "source": {
+        "source": "github",
+        "repo": "bubblav-org/tools"
+      },
       "description": "BubblaV MCP server integration with web scraping skill",
       "version": "0.1.0",
       "author": {
