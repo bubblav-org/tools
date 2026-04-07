@@ -56,13 +56,16 @@ Create a new custom webhook tool. Required fields:
 - `tool_name` — unique identifier (letters, numbers, underscores, hyphens)
 - `display_name` — human-readable name
 - `description_for_ai` — instructions for the AI on when to use this tool
+- `description` — short human-readable description shown in dashboard (auto-derived from description_for_ai if omitted)
 - `endpoint_url` — webhook URL (HTTPS)
 - `authentication_type` — `none`, `bearer`, or `hmac`
 
 Optional fields:
-- `argument_schema` — JSON Schema for tool parameters
+- `argument_schema` — JSON Schema object for tool parameters (see format below)
 - `http_method` — GET (default), POST, PUT, PATCH, DELETE
 - `activate_for_website` — auto-activate for current website (default: true)
+
+**argument_schema format**: Must be a valid JSON Schema object with `type: "object"`, a `properties` dict, and an optional `required` array. Do NOT pass type/properties/required as separate top-level arguments.
 
 ```json
 {
@@ -75,6 +78,7 @@ Optional fields:
       "tool_name": "find_tournaments",
       "display_name": "Find Tournaments",
       "description_for_ai": "Search for pickleball tournaments near a given city. Use when a visitor asks about upcoming tournaments in their area.",
+      "description": "Searches pickleball tournaments by city and radius",
       "endpoint_url": "https://api.example.com/tournaments/search",
       "authentication_type": "bearer",
       "http_method": "POST",
