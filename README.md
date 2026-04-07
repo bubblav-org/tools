@@ -35,11 +35,29 @@ Scrape a page:
 npx @bubblav/tools scrape https://example.com
 ```
 
-Get the Claude Code skill install path:
+Get a skill install path:
 
 ```bash
 npx @bubblav/tools skills add web-scrape-md
+npx @bubblav/tools skills add manage-custom-tools
 ```
+
+## Skills
+
+### web-scrape-md
+
+Scrape a public URL into markdown for AI context. Activates when you ask to read or scrape a web page.
+
+### manage-custom-tools
+
+Create and manage custom webhook tools for your BubblaV chatbot via the MCP server. Activates when you ask to add, update, delete, or manage custom tools for your chatbot.
+
+**Example prompts:**
+- "Add a custom tool to my chatbot that finds tournaments near a city"
+- "List my custom tools"
+- "Update the endpoint for my search tool"
+
+**Requires:** Pro plan or higher.
 
 ## Claude Code Plugin
 
