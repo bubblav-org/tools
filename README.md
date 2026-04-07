@@ -35,11 +35,11 @@ Scrape a page:
 npx @bubblav/tools scrape https://example.com
 ```
 
-Get a skill install path:
+Install skills:
 
 ```bash
-npx @bubblav/tools skills add web-scrape-md
-npx @bubblav/tools skills add manage-custom-tools
+npx skills add https://github.com/bubblav-org/tools --skill web-scrape-md
+npx skills add https://github.com/bubblav-org/tools --skill manage-custom-tools
 ```
 
 ## Skills
