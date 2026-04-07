@@ -61,7 +61,7 @@ Create a new custom webhook tool. Required fields:
 - `authentication_type` — `none`, `bearer`, or `hmac`
 
 Optional fields:
-- `argument_schema` — JSON Schema object for tool parameters (see format below)
+- `argument_schema` — flat parameter map for tool parameters (see format below)
 - `http_method` — GET (default), POST, PUT, PATCH, DELETE
 - `activate_for_website` — auto-activate for current website (default: true)
 
