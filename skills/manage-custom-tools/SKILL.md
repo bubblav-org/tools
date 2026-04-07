@@ -65,7 +65,7 @@ Optional fields:
 - `http_method` — GET (default), POST, PUT, PATCH, DELETE
 - `activate_for_website` — auto-activate for current website (default: true)
 
-**argument_schema format**: Must be a valid JSON Schema object with `type: "object"`, a `properties` dict, and an optional `required` array. Do NOT pass type/properties/required as separate top-level arguments.
+**argument_schema format**: Must be a flat object where each key is a parameter name. Each parameter object supports `type` (string, number, boolean, object, array), `description`, `required` (boolean), `default`, and `method` (query, body, path).
 
 ```json
 {
@@ -83,12 +83,8 @@ Optional fields:
       "authentication_type": "bearer",
       "http_method": "POST",
       "argument_schema": {
-        "type": "object",
-        "properties": {
-          "city": { "type": "string", "description": "City name to search near" },
-          "radius_miles": { "type": "number", "description": "Search radius in miles (default: 50)" }
-        },
-        "required": ["city"]
+        "city": { "type": "string", "description": "City name to search near", "method": "query", "required": true },
+        "radius_miles": { "type": "number", "description": "Search radius in miles (default: 50)", "method": "query", "default": 50 }
       }
     }
   }
@@ -152,6 +148,62 @@ Enable or disable a tool for the current website.
   }
 }
 ```
+
+## Authentication Types
+
+When creating a tool, you must choose an `authentication_type`. Pick based on the user's endpoint security:
+
+### `none` — No Authentication
+- **Use when**: Public APIs, internal testing, or when passing API keys as query parameters.
+- **Headers sent**: None — the request is unauthenticated.
+- **Warning**: Only use for public APIs. Anyone with the endpoint URL can call it.
+
+### `bearer` — Bearer Token
+- **Use when**: The user's API expects an `Authorization: Bearer <token>` header.
+- **How it works**: BubblaV auto-generates a secret key. On every call, it sends:
+  ```
+  Authorization: Bearer <secret_key>
+  ```
+- **The user must**: Store the `secret_key` as `BUBBLAV_SECRET_KEY` in their backend and validate it.
+- **Validation example (Node.js)**:
+  ```javascript
+  const token = req.headers.authorization?.split(' ')[1];
+  if (token !== process.env.BUBBLAV_SECRET_KEY) {
+    return res.status(401).json({ error: 'Invalid token' });
+  }
+  ```
+
+### `hmac` — HMAC Signature (Recommended)
+- **Use when**: The user wants the most secure option. Prevents replay attacks and ensures request authenticity.
+- **How it works**: BubblaV signs every request with HMAC-SHA256 and sends:
+  ```
+  X-BubblaV-Signature: sha256=<hex_signature>
+  X-BubblaV-Timestamp: <unix_ms_timestamp>
+  ```
+- **Signature payload**: `<timestamp>.<json_body>` (compact JSON, no whitespace).
+- **The user must**: Store the `secret_key` and verify the signature server-side.
+- **Validation example (Node.js)**:
+  ```javascript
+  const crypto = require('crypto');
+  const sig = req.headers['x-bubblav-signature']?.replace('sha256=', '');
+  const ts = req.headers['x-bubblav-timestamp'];
+  // Reject requests older than 5 minutes
+  if (Date.now() - parseInt(ts) > 300000) return res.status(401).json({ error: 'Expired' });
+  const expected = crypto.createHmac('sha256', process.env.BUBBLAV_SECRET_KEY)
+    .update(`${ts}.${JSON.stringify(req.body)}`).digest('hex');
+  if (sig !== expected) return res.status(401).json({ error: 'Invalid signature' });
+  ```
+
+### Recommendations
+
+| Scenario | Auth Type |
+|----------|-----------|
+| Public API (e.g. weather, search) | `none` |
+| Internal API with simple auth | `bearer` |
+| Production API, sensitive data | `hmac` |
+| User unsure | `hmac` (safest default) |
+
+**Always share the `secret_key` with the user immediately after creation** — it is shown only once and cannot be retrieved later.
 
 ## Notes
 
